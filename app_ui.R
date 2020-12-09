@@ -1,7 +1,7 @@
 library("shiny")
 library("dplyr")
 
-co2_data <- read.csv("owid-co2-data.csv")
+co2_data <- read.csv("data/owid-co2-data.csv")
 co2_data <- filter(co2_data, iso_code != "")
 co2_data <- filter(co2_data, iso_code != "OWID_WRL")
 
@@ -192,26 +192,33 @@ page_two <- tabPanel(
                        the curve of global GDP."))
 )
 
-col_names <- c("consumption_co2", "co2_per_capita")
+col_names <- colnames(co2_without_groups)
 
 page_three <- tabPanel(
 
     "Climate Change Heat Map Visualization",
-
-    plotOutput("page3_heatmap"),
-
-    time_input <- sliderInput(
-        inputId = "time_input",
-        label = "Choose a year",
-        min = 1751,
-        max = 2018,
-        value = 2000,
-        step = 1
-    ),
-    metric_input <- selectInput(
-        inputId = "metric_input",
-        label = "Select a metric",
-        choices = col_names
+    
+    sidebarLayout(
+        
+        sidebarPanel(
+            time_input <- sliderInput(
+                inputId = "time_input",
+                label = "Choose a year",
+                min = 1960,
+                max = 2018,
+                value = 1975,
+                step = 1
+            ),
+            metric_input <- selectInput(
+                inputId = "metric_input",
+                label = "Select a metric",
+                choices = col_names[4:38]
+            )
+        ),
+        
+        mainPanel(
+            plotOutput("page3_heatmap")
+        )
     )
 )
 

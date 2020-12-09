@@ -4,6 +4,7 @@ library("tidyverse")
 library("maps")
 library("countrycode")
 library("rworldmap")
+gc()
 server <- function(input, output) {
     co2_data <- read.csv("data/owid-co2-data.csv")
     co2_data1 <- co2_data
@@ -131,7 +132,7 @@ server <- function(input, output) {
     })
 
     #######page3 code here!#######
-    co2_updated <- read.csv("data/owid-co2-data-updated")
+    co2_updated <- read.csv("data/owid-co2-data-updated.csv")
 
     # Cleaning up data #
     co2_without_groups <- co2_updated %>%
@@ -139,6 +140,7 @@ server <- function(input, output) {
       filter(country != "World")
 
     # Change Column Names for appropiae labelinng #
+    df <- co2_without_groups
     names(df)[names(df) == "co2"] <- "Annual Production Based CO2 Emissions"
     names(df)[names(df) == "co2_growth_prct"] <- "Percentage change in CO2 emissions"
     names(df)[names(df) == "co2_growth_abs"] <- "Annual change in CO2 emissions measured in million tonnes"
@@ -175,11 +177,10 @@ server <- function(input, output) {
     names(df)[names(df) == "population"] <- "Total population"
     names(df)[names(df) == "gdp"] <- "Total real gross domestic product, inflation-adjusted"
 
-    col_names_df <- colnames(climate_change_without_groups)
+    col_names_df <- colnames(co2_without_groups)
     col_names_df_2 <- colnames(df)
 
     output$page3_heatmap <- renderPlot({
-      co2_without_na <- na.omit(co2_without_groups)
       world_shape <- map_data("world2")
 
       iso_code <- countrycode(sourcevar = world_shape$region,
@@ -187,9 +188,11 @@ server <- function(input, output) {
                               destination = "iso3c")
 
       world_shape_iso <- cbind(world_shape, iso_code) %>%
-        left_join(co2_without_na, by = "iso_code")
-
-      ggplot(world_shape_iso %>% filter(year == input$time_input)) +
+        left_join(co2_without_groups, by = "iso_code")
+      
+      index <- match(input$metric_input, col_names_df)
+      
+      heatmap <- ggplot(world_shape_iso %>% filter(year == input$time_input)) +
         geom_polygon(
           mapping = aes_string(x = "long", y = "lat", group = "group", fill = input$metric_input),
           color = "white",
@@ -197,6 +200,8 @@ server <- function(input, output) {
         ) +
         coord_map() +
         scale_fill_continuous(low = "blue", high = "red")
+      
+      return(heatmap)
     })
 
     #######page4 code here!#######
