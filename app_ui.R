@@ -173,8 +173,8 @@ page_two <- tabPanel(
     sliderInput(
         "To select a ending year",
         inputId = "page2_chart_end_year",
-        min = 1950,
-        max = 2018,
+        min = 1960,
+        max = 2014,
         value = 2018,
     ),
     plotOutput(outputId = "page2_co2_chart"),
@@ -205,19 +205,20 @@ page_three <- tabPanel(
                 inputId = "time_input",
                 label = "Choose a year",
                 min = 1960,
-                max = 2018,
+                max = 2014,
                 value = 1975,
                 step = 1
             ),
             metric_input <- selectInput(
                 inputId = "metric_input",
                 label = "Select a metric",
-                choices = col_names[4:38]
+                choices = col_names[c(5, 19, 20, 21, 22, 35, 36)]
             )
         ),
         
         mainPanel(
-            plotOutput("page3_heatmap")
+            column(8, offset = 0.5, plotOutput("page3_heatmap")),
+            column(4, offset = 0.5, plotOutput("page3_charts"))
         )
     )
 )

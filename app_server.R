@@ -139,9 +139,9 @@ server <- function(input, output) {
       filter(iso_code != "") %>%
       filter(country != "World")
 
-    # Change Column Names for appropiae labelinng #
+    # Change Column Names for appropriate labeling #
     df <- co2_without_groups
-    names(df)[names(df) == "co2"] <- "Annual Production Based CO2 Emissions"
+    names(df)[names(df) == "co2"] <- "Annual Production Based CO2 Emissions" #omit
     names(df)[names(df) == "co2_growth_prct"] <- "Percentage change in CO2 emissions"
     names(df)[names(df) == "co2_growth_abs"] <- "Annual change in CO2 emissions measured in million tonnes"
     names(df)[names(df) == "consumption_co2"] <- "Annual consumption-based CO2 emissions"
@@ -156,10 +156,10 @@ server <- function(input, output) {
     names(df)[names(df) == "consumption_co2_per_gdp"] <- "Consumption-based CO2 emissions measured per unit of gross domestic product"
     names(df)[names(df) == "co2_per_unit_energy"] <- "CO2 emissions measured per unit of energy consumed"
     names(df)[names(df) == "cement_co2"] <- "CO2 emissions from cement production"
-    names(df)[names(df) == "coal_co2"] <- "CO2 emissions from coal production"
-    names(df)[names(df) == "flaring_co2"] <- "CO2 emissions from gas flaring"
-    names(df)[names(df) == "gas_co2"] <- "CO2 emissions from gas production"
-    names(df)[names(df) == "oil_co2"] <- "CO2 emissions from oil production"
+    names(df)[names(df) == "coal_co2"] <- "CO2 emissions from coal production" # inspect
+    names(df)[names(df) == "flaring_co2"] <- "CO2 emissions from gas flaring" # inspect
+    names(df)[names(df) == "gas_co2"] <- "CO2 emissions from gas production" # inspect
+    names(df)[names(df) == "oil_co2"] <- "CO2 emissions from oil production" # inspect
     names(df)[names(df) == "cement_co2_per_capita"] <- "Per capita CO2 emissions from cement production"
     names(df)[names(df) == "coal_co2_per_capita"] <- "Per capita CO2 emissions from coal production"
     names(df)[names(df) == "flaring_co2_per_capita"] <- "Per capita CO2 emissions from flaring"
@@ -172,8 +172,8 @@ server <- function(input, output) {
     names(df)[names(df) == "nitrous_oxide"] <- "Annual nitrous oxide emissions"
     names(df)[names(df) == "nitrous_oxide_per_capita"] <- "Nitrous oxide emissions per capita"
     names(df)[names(df) == "primary_energy_consumption"] <- "Primary energy consumption"
-    names(df)[names(df) == "energy_per_capita"] <- "Primary energy consumption per capita"
-    names(df)[names(df) == "energy_per_gdp"] <- "Primary energy consumption per unit of gross domestic product"
+    names(df)[names(df) == "energy_per_capita"] <- "Primary energy consumption per capita" # inspect
+    names(df)[names(df) == "energy_per_gdp"] <- "Primary energy consumption per unit of gross domestic product" # inspect
     names(df)[names(df) == "population"] <- "Total population"
     names(df)[names(df) == "gdp"] <- "Total real gross domestic product, inflation-adjusted"
 
@@ -189,19 +189,45 @@ server <- function(input, output) {
 
       world_shape_iso <- cbind(world_shape, iso_code) %>%
         left_join(co2_without_groups, by = "iso_code")
-      
+
       index <- match(input$metric_input, col_names_df)
-      
+
       heatmap <- ggplot(world_shape_iso %>% filter(year == input$time_input)) +
         geom_polygon(
           mapping = aes_string(x = "long", y = "lat", group = "group", fill = input$metric_input),
           color = "white",
           size = .1
         ) +
+        labs(fill = col_names_df_2[index]) +
+        xlab("Latitude") +
+        ylab("Longitude") +
         coord_map() +
-        scale_fill_continuous(low = "blue", high = "red")
+        scale_fill_continuous(low = "Green", high = "Red")
       
       return(heatmap)
+    })
+    
+    output$page3_charts <- renderPlot({
+      
+      continents_list <- c("Asia", "Europe", "Africa", "South America", "North America", "Oceania")
+      
+      colors <- c("#003f5c", "#444e86", "#955196", "#dd5182", "#ff6e54", "#ffa600")
+      
+      data_by_continent <- co2_updated %>%
+        filter(country %in% continents_list) %>%
+        filter(year == input$time_input)
+      
+      
+      bar_plot <- ggplot(data_by_continent) +
+        geom_bar(aes_string(x = "country", y = "co2_growth_prct"),
+                 stat = "identity",
+                 fill = colors,
+                 width = 0.5,
+                 na.rm = T) +
+        xlab("Continent") +
+        ylab("Percentage change in CO2 emissions")
+      
+      return(bar_plot)
     })
 
     #######page4 code here!#######
