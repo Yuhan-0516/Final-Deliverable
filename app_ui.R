@@ -21,14 +21,20 @@ page_one <- tabPanel(
     includeCSS("style.css"),
     tags$body(
         tags$div(
+<<<<<<< HEAD
+            tags$h2("Greenhouse effect and CO2 emissions"),
+            tags$hr(),
+            tags$p("Co2 has the effect of hindering
+=======
         tags$h2("Greenhouse effect and CO2 emissions"),
         tags$hr(),
+<<<<<<< HEAD
         tags$p("CO2 has the effect of hindering
                the spread of infrared rays. Therefore, when the content of CO2
                in the atmosphere increases, the heat transmitted by the earth
                to outer space will decrease, and the temperature will rise.
                This is known as the Greenhouse effect and CO2 is a major greenhouse gas. The greenhouse effect will have
-               significant impacts on environment. So for our project we want to address the severity 
+               significant impacts on environment. So for our project we want to address the severity
                of these issues on our environment through the use of data. In doing so, we would also like
                to identify potential underlying trends between different CO2 emission data with economic factors and other natural factors such as population growth and energy consumption. By doing I hope we could educate people more on climate change and raise awareness about this global issue."),
         tags$ul( tags$li("# Increase of insect pests"),
@@ -44,6 +50,29 @@ page_one <- tabPanel(
                  tags$image( src ="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607267156300&di=7e8311ae93b19031c0fcf638e396f725&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn15%2F400%2Fw1200h800%2F20180322%2F05df-fysnevk6209859.jpg",
                              width="500", height="350")
                  ),
+=======
+        tags$p("Co2 has the effect of hindering
+>>>>>>> 38441006d93a745871032de7b3c3720b34335cd3
+               the spread of infrared rays. Therefore, when the content of Co2
+               in the atmosphere increases, the heat transmitted by the earth
+               to outer space will decrease, and the temperature will rise.
+               This is the greenhouse effect caused by Co2."),
+            tags$p("The greenhouse effect will have
+               significant impacts on environment."),
+            tags$ul( tags$li("# Increase of insect pests"),
+                     tags$image( src ="http://www.fuannuo.cn/upload/202002/1581933767722096.jpg",
+                                 width="500", height="350"),
+                     tags$li("# Glaciers melting and sea level rising"),
+                     tags$image( src ="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607266830585&di=1db9f60f49a3e646acff139e930bf9a9&imgtype=0&src=http%3A%2F%2Fp.ssl.qhimg.com%2Ft01a26246fb31e8052e.jpg",
+                                 width="500", height="350"),
+                     tags$li("# Increase of extreme weather and storms"),
+                     tags$image( src ="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607266977395&di=de01d3148420da5b2a60844a41d7b27c&imgtype=0&src=http%3A%2F%2Fe.hiphotos.baidu.com%2Fbaike%2Fpic%2Fitem%2Fe4dde71190ef76c6737f622a9616fdfaaf516706.jpg",
+                                 width="500", height="280"),
+                     tags$li("# Increase of droughts"),
+                     tags$image( src ="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607267156300&di=7e8311ae93b19031c0fcf638e396f725&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn15%2F400%2Fw1200h800%2F20180322%2F05df-fysnevk6209859.jpg",
+                                 width="500", height="350")
+            ),
+>>>>>>> 2cc90eebf0382559e50af21ef03480c0306983e5
         ),
 
         tags$h2("Development vs. Environmental protection"),
@@ -162,7 +191,6 @@ page_two <- tabPanel(
            em(textOutput(outputId = "National_gdp_value"))
     ),
 
-
     tags$h3("Global and Continental Data Curves"),
     tags$hr(),
     sliderInput(
@@ -197,11 +225,15 @@ page_two <- tabPanel(
 col_names <- colnames(co2_without_groups)
 
 page_three <- tabPanel(
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 38441006d93a745871032de7b3c3720b34335cd3
     "Energy and CO2 Emissions",
-    
+
     sidebarLayout(
-        
+
         sidebarPanel(
             width = 2,
             time_input <- sliderInput(
@@ -221,18 +253,66 @@ page_three <- tabPanel(
             p("For the heatmap on the left it shows us a visualization in terms of each metrics' intensity within each country of the world (Grey color means there's no data available for the given year)"),
             p("For the Bar Chart to the right it shows us the continental data for each continent's CO2 emission data in relation to global trade. These two plots put together are trying to show the correlation between energy sector CO2 emissions and CO2 emissions related to global trade.")
         ),
-        
+
         mainPanel(
             column(width = 7, h3("Heatmap By Country of Different Metrics of Interest By Year"), plotlyOutput("page3_heatmap")),
             column(width = 5, h3("Bar Chart of Each Contintent's CO2 emissions as a part of global trade by Year"), plotlyOutput("page3_charts")),
-            
+
         )
     )
 )
 
 page_four <- tabPanel(
     "Green development",
-    #######page4 code here!#######
+
+    includeCSS("style.css"),
+
+    h3("What is Green Development?"),
+
+    tags$p("Green development is a real estate development concept that considers
+       social and environmental impacts of development."),
+    tags$p("It is defined by three
+       sub-categories: environmental responsiveness, resource efficiency, and
+       community and cultural sensitivity."),
+
+    h3("Environmental Responsiveness"),
+    tags$p("There are many aspects to green development, on this page we will only consider the country’s carbon emissions."),
+
+    column(4,
+           offset = 0.5,
+           selectInput(
+               inputId = "page4_country_name",
+               label = "To select a country",
+               choices = country_names$country
+           )
+    ),
+
+    column(4,
+           offset = 0.5,
+           sliderInput(
+               "To select a beginning year",
+               inputId = "page4_chart_start_year",
+               min = 1950,
+               max = 2018,
+               value = 1995,
+           )
+    ),
+
+    column(4,
+           offset = 0.5,
+           sliderInput(
+               "To select a ending year",
+               inputId = "page4_chart_end_year",
+               min = 1960,
+               max = 2014,
+               value = 2018,
+           )
+    ),
+
+    plotOutput(outputId = "page4_co2_growth_prct_chart"),
+    plotOutput(outputId = "page4_co2_per_capita_chart"),
+    plotOutput(outputId = "page4_co2_per_gdp_chart")
+
 )
 
 page_five <- tabPanel(
@@ -247,9 +327,6 @@ page_five <- tabPanel(
     h3("How does this relate to our objectives?"),
     p("Tying back to our introduction our intention is to raise awareness about the severity of climate change through data visualizations. In doing so we explored the correlations between different groups of data that showed a clear relationship and identified benefactors towards Carbon Dioxide Emissions as a major proponent of the worsening Climate Change situation worldwide. We identified several important sub-trends within climate change that being Energy production and global trade as a major contributor as a source of climate change. Through this analysis we also showed nations that are performing well in terms of green development and seek to look into solutions which worked for those countries that could be applied to other countries worldwide to combat climate change globaly.")
 )
-
-
-
 
 ui <- navbarPage(
     "Development and Co2 emission reduction", # application title
