@@ -21,9 +21,15 @@ page_one <- tabPanel(
     includeCSS("style.css"),
     tags$body(
         tags$div(
+<<<<<<< HEAD
             tags$h2("Greenhouse effect and CO2 emissions"),
             tags$hr(),
             tags$p("Co2 has the effect of hindering
+=======
+        tags$h2("Greenhouse effect and CO2 emissions"),
+        tags$hr(),
+        tags$p("Co2 has the effect of hindering
+>>>>>>> 38441006d93a745871032de7b3c3720b34335cd3
                the spread of infrared rays. Therefore, when the content of Co2
                in the atmosphere increases, the heat transmitted by the earth
                to outer space will decrease, and the temperature will rise.
@@ -196,7 +202,11 @@ page_two <- tabPanel(
 col_names <- colnames(co2_without_groups)
 
 page_three <- tabPanel(
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 38441006d93a745871032de7b3c3720b34335cd3
     "Energy and CO2 Emissions",
     
     sidebarLayout(
