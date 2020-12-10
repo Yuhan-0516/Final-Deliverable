@@ -1,5 +1,6 @@
 library("shiny")
 library("dplyr")
+library("plotly")
 
 co2_data <- read.csv("data/owid-co2-data.csv")
 co2_data <- filter(co2_data, iso_code != "")
@@ -77,7 +78,7 @@ page_one <- tabPanel(
 ) # end of page one
 
 page_two <- tabPanel(
-    "Co2 emissions",
+    "CO2 emissions",
     includeCSS("style.css"),
 
     tags$p("On this page, you can get CO2 emissions, population and
@@ -196,29 +197,34 @@ col_names <- colnames(co2_without_groups)
 
 page_three <- tabPanel(
 
-    "Climate Change Heat Map Visualization",
+    "Energy and CO2 Emissions",
     
     sidebarLayout(
         
         sidebarPanel(
+            width = 2,
             time_input <- sliderInput(
                 inputId = "time_input",
                 label = "Choose a year",
                 min = 1960,
                 max = 2014,
-                value = 1975,
+                value = 1967,
                 step = 1
             ),
             metric_input <- selectInput(
                 inputId = "metric_input",
                 label = "Select a metric",
-                choices = col_names[c(5, 19, 20, 21, 22, 35, 36)]
-            )
+                choices = col_names[c(19, 5, 20, 21, 22, 35, 36)],
+            ),
+            h3("Explanation"),
+            p("For the heatmap on the left it shows us a visualization in terms of each metrics' intensity within each country of the world (Grey color means there's no data available for the given year)"),
+            p("For the Bar Chart to the right it shows us the continental data for each continent's CO2 emission data in relation to global trade. These two plots put together are trying to show the correlation between energy sector CO2 emissions and CO2 emissions related to global trade.")
         ),
         
         mainPanel(
-            column(8, offset = 0.5, plotOutput("page3_heatmap")),
-            column(4, offset = 0.5, plotOutput("page3_charts"))
+            column(width = 7, h3("Heatmap By Country of Different Metrics of Interest By Year"), plotlyOutput("page3_heatmap")),
+            column(width = 5, h3("Bar Chart of Each Contintent's CO2 emissions as a part of global trade by Year"), plotlyOutput("page3_charts")),
+            
         )
     )
 )
@@ -230,7 +236,13 @@ page_four <- tabPanel(
 
 page_five <- tabPanel(
     "Conclusion",
-    #######page5 code here!#######
+    h2("Summary"),
+    h3("Takeaway from CO2 emissions data"),
+    p(""),
+    h3("Takeaway from Energy and CO2 data"),
+    p("As you can see from the bar plot to the right and he heat map to the left there are obvious patterns that could be seen. Firstly you could see that as you increase the slider for year there is a significant color change for all recorded CO2 Emissions by the energy sector (coal, gas, flaring, oil). A prominent example of this is coal. You could see that as we increase the year it the colour change in the Asia continent signifies a large increase in CO2 emissions from coal production. As an effect the gloabl shares of CO2 emissions by Asia also increased as shown in the Bar Chart to the right. This shows that energy sector CO2 emissions is large benefactor towards a continent's CO2 emissions in terms of trade. Secondly, a noticeable pattern is of countries within the North American continent and the Asia. For instance countries like the United States and has their energy sector CO2 emissions reduced as time progressed, however countries like China within Asia has a significant increase in their energy sector CO2 emissions. In summary, this is also concurrent with the GDP data shown in the page before. Taking into consideration the fast rates of economic growth developing countries like China is facing it also catalyzed a significant increase in CO2 emissions by their energy sectors and also their share of CO2 in global trade as labor costs are lower within developing nations."),
+    h3("Takeaway from Green Development data"),
+    p("")
 )
 
 

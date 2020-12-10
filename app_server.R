@@ -4,6 +4,7 @@ library("tidyverse")
 library("maps")
 library("countrycode")
 library("rworldmap")
+library("plotly")
 gc()
 server <- function(input, output) {
     co2_data <- read.csv("data/owid-co2-data.csv")
@@ -180,7 +181,7 @@ server <- function(input, output) {
     col_names_df <- colnames(co2_without_groups)
     col_names_df_2 <- colnames(df)
 
-    output$page3_heatmap <- renderPlot({
+    output$page3_heatmap <- renderPlotly({
       world_shape <- map_data("world2")
 
       iso_code <- countrycode(sourcevar = world_shape$region,
@@ -194,7 +195,7 @@ server <- function(input, output) {
 
       heatmap <- ggplot(world_shape_iso %>% filter(year == input$time_input)) +
         geom_polygon(
-          mapping = aes_string(x = "long", y = "lat", group = "group", fill = input$metric_input),
+          mapping = aes_string(x = "long", y = "lat", group = "group", fill = input$metric_input, label = "country"),
           color = "white",
           size = .1
         ) +
@@ -202,12 +203,13 @@ server <- function(input, output) {
         xlab("Latitude") +
         ylab("Longitude") +
         coord_map() +
-        scale_fill_continuous(low = "Green", high = "Red")
+        scale_fill_continuous(low = "Green", high = "Red") 
+        theme_gray()
       
-      return(heatmap)
+      return(ggplotly(heatmap))
     })
     
-    output$page3_charts <- renderPlot({
+    output$page3_charts <- renderPlotly({
       
       continents_list <- c("Asia", "Europe", "Africa", "South America", "North America", "Oceania")
       
@@ -219,15 +221,16 @@ server <- function(input, output) {
       
       
       bar_plot <- ggplot(data_by_continent) +
-        geom_bar(aes_string(x = "country", y = "co2_growth_prct"),
+        geom_bar(aes_string(x = "country", y = "share_global_co2"),
                  stat = "identity",
                  fill = colors,
                  width = 0.5,
                  na.rm = T) +
         xlab("Continent") +
-        ylab("Percentage change in CO2 emissions")
+        ylab("Continental annual CO2 emissions") +
+        theme_gray()
       
-      return(bar_plot)
+      return(ggplotly(bar_plot))
     })
 
     #######page4 code here!#######
