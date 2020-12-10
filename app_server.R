@@ -234,5 +234,7 @@ server <- function(input, output) {
     })
 
     #######page4 code here!#######
-
+    output$green_dev <- renderPlot({
+      
+    })
 }

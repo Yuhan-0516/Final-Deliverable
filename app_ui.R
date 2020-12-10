@@ -23,13 +23,14 @@ page_one <- tabPanel(
         tags$div(
         tags$h2("Greenhouse effect and CO2 emissions"),
         tags$hr(),
-        tags$p("Co2 has the effect of hindering
-               the spread of infrared rays. Therefore, when the content of Co2
+        tags$p("CO2 has the effect of hindering
+               the spread of infrared rays. Therefore, when the content of CO2
                in the atmosphere increases, the heat transmitted by the earth
                to outer space will decrease, and the temperature will rise.
-               This is the greenhouse effect caused by Co2."),
-        tags$p("The greenhouse effect will have
-               significant impacts on environment."),
+               This is known as the Greenhouse effect and CO2 is a major greenhouse gas. The greenhouse effect will have
+               significant impacts on environment. So for our project we want to address the severity 
+               of these issues on our environment through the use of data. In doing so, we would also like
+               to identify potential underlying trends between different CO2 emission data with economic factors and other natural factors such as population growth and energy consumption. By doing I hope we could educate people more on climate change and raise awareness about this global issue."),
         tags$ul( tags$li("# Increase of insect pests"),
                  tags$image( src ="http://www.fuannuo.cn/upload/202002/1581933767722096.jpg",
                              width="500", height="350"),
@@ -242,7 +243,7 @@ page_five <- tabPanel(
     h3("Takeaway from Energy and CO2 data"),
     p("On the Energy and CO2 emissions tab you can see from the bar plot to the right and the heat map to the left there are a few obvious patterns that could be seen. Firstly you could see that as you increase the slider for year there is a significant color change for all recorded CO2 Emissions by the energy sector (coal, gas, flaring, oil). A prominent example of this is coal. You could see that as we increase the year the colour change in the Asia continent signifies a large increase in CO2 emissions from coal production. As an effect the gloabl shares of CO2 emissions by Asia also increased as shown in the Bar Chart to the right. This shows that energy sector CO2 emissions is a large benefactor towards a continent's CO2 emissions in terms of trade. Secondly, a noticeable pattern is of countries within the North American continent and Asia. For instance countries like the United States has their energy sector CO2 emissions reduced as time progressed, however countries like China within Asia has a significant increase in their energy sector CO2 emissions as time progressed. In summary, this is also concurrent with the GDP data shown in the page before. Taking into consideration the fast rates of economic growth developing countries like China is facing it also catalyzed a significant increase in CO2 emissions by their energy sectors and also their share of CO2 emissions in global trade as labor costs are lower within developing nations (India, China, Vietnam, etc.), which also displays the higher tendency for developing nations to rely more on energy sector production that signifcantly increase CO2 emissions globaly."),
     h3("Takeaway from Green Development data"),
-    p(""),
+    p("On the Green Development tab you can see that there are"),
     h3("How does this relate to our objectives?"),
     p("Tying back to our introduction our intention is to raise awareness about the severity of climate change through data visualizations. In doing so we explored the correlations between different groups of data that showed a clear relationship and identified benefactors towards Carbon Dioxide Emissions as a major proponent of the worsening Climate Change situation worldwide. We identified several important sub-trends within climate change that being Energy production and global trade as a major contributor as a source of climate change. Through this analysis we also showed nations that are performing well in terms of green development and seek to look into solutions which worked for those countries that could be applied to other countries worldwide to combat climate change globaly.")
 )
