@@ -254,7 +254,10 @@ page_four <- tabPanel(
     
     h3("Environmental Responsiveness"),
     tags$p("There are many aspects to green development, on this page we will only consider the country’s carbon emissions."),
-    
+    tags$p("Green development is multifaceted, and on this page we will only consider the country’s carbon emissions. 
+           We will compare the country’s Percentage change in CO2 emissions, Average per capita CO2 emissions, 
+           and CO2 emissions measured per unit of gross domestic product in recent years to observe whether the country has 
+           reduced its carbon emissions."),
     column(4,
            offset = 0.5,
            selectInput(
@@ -285,10 +288,14 @@ page_four <- tabPanel(
                value = 2018,
            )
     ),
+    column(3,
+           offset = 0.5,
+           plotOutput(outputId = "page4_co2_growth_prct_chart"),
+           plotOutput(outputId = "page4_co2_per_capita_chart"),
+           plotOutput(outputId = "page4_co2_per_gdp_chart")
+    ),
     
-    plotOutput(outputId = "page4_co2_growth_prct_chart"),
-    plotOutput(outputId = "page4_co2_per_capita_chart"),
-    plotOutput(outputId = "page4_co2_per_gdp_chart")
+    
     
 )
 
