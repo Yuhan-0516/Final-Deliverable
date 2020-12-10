@@ -21,15 +21,12 @@ page_one <- tabPanel(
     includeCSS("style.css"),
     tags$body(
         tags$div(
-<<<<<<< HEAD
             tags$h2("Greenhouse effect and CO2 emissions"),
             tags$hr(),
-            tags$p("Co2 has the effect of hindering
-=======
+            tags$p("Co2 has the effect of hindering"),
         tags$h2("Greenhouse effect and CO2 emissions"),
         tags$hr(),
         tags$p("Co2 has the effect of hindering
->>>>>>> 38441006d93a745871032de7b3c3720b34335cd3
                the spread of infrared rays. Therefore, when the content of Co2
                in the atmosphere increases, the heat transmitted by the earth
                to outer space will decrease, and the temperature will rise.
@@ -202,11 +199,6 @@ page_two <- tabPanel(
 col_names <- colnames(co2_without_groups)
 
 page_three <- tabPanel(
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> 38441006d93a745871032de7b3c3720b34335cd3
     "Energy and CO2 Emissions",
     
     sidebarLayout(
@@ -248,18 +240,20 @@ page_four <- tabPanel(
     
     tags$p("Green development is a real estate development concept that considers
        social and environmental impacts of development."),
-    tags$p("It is defined by three 
-       sub-categories: environmental responsiveness, resource efficiency, and 
-       community and cultural sensitivity."),
+    tags$p("It is defined by three sub-categories: ",
+        tags$strong("environmental responsiveness"), 
+        (", resource efficiency, and 
+       community and cultural sensitivity.")),
+    tags$p("There are many aspects to green development, on this page we will only 
+        consider the country’s carbon emissions."),
     
     h3("Environmental Responsiveness"),
-    tags$p("There are many aspects to green development, on this page we will only consider the country’s carbon emissions."),
     tags$p("Green development is multifaceted, and on this page we will only consider the country’s carbon emissions. 
            We will compare the country’s Percentage change in CO2 emissions, Average per capita CO2 emissions, 
            and CO2 emissions measured per unit of gross domestic product in recent years to observe whether the country has 
            reduced its carbon emissions."),
     column(4,
-           offset = 0.5,
+           offset = 0.2,
            selectInput(
                inputId = "page4_country_name",
                label = "To select a country",
@@ -268,34 +262,41 @@ page_four <- tabPanel(
     ),
     
     column(4,
-           offset = 0.5,
-           sliderInput(
-               "To select a beginning year",
-               inputId = "page4_chart_start_year",
-               min = 1950,
-               max = 2018,
-               value = 1995,
-           )
+        offset = 0.2,
+        sliderInput(
+            "To select a beginning year",
+            inputId = "page4_chart_start_year",
+            min = 1950,
+            max = 2018,
+            value = 1995,
+        )
     ),
     
     column(4,
-           offset = 0.5,
-           sliderInput(
-               "To select a ending year",
-               inputId = "page4_chart_end_year",
-               min = 1960,
-               max = 2014,
-               value = 2018,
-           )
+        offset = 0.2,
+        sliderInput(
+            "To select a ending year",
+            inputId = "page4_chart_end_year",
+            min = 1960,
+            max = 2014,
+            value = 2018,
+        )
     ),
-    column(3,
-           offset = 0.5,
-           plotOutput(outputId = "page4_co2_growth_prct_chart"),
-           plotOutput(outputId = "page4_co2_per_capita_chart"),
-           plotOutput(outputId = "page4_co2_per_gdp_chart")
+    column(4,
+        offset = 0.2,
+        plotOutput(outputId = "page4_co2_growth_prct_chart")
+    ),
+    column(4,
+        offset = 0.2,
+        plotOutput(outputId = "page4_co2_per_capita_chart")
+    ),
+    column(4,
+        offset = 0.2,
+        plotOutput(outputId = "page4_co2_per_gdp_chart")   
     ),
     
-    
+    tags$p("Beside reducing carbon emissions, Environmental Responsiveness also includes the country's greening."),
+    tags$p("For more information, look up ", tags$a(href="https://en.wikipedia.org/wiki/Carbon_neutrality", "Carbon Neutrality.")),
     
 )
 

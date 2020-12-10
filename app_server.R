@@ -242,10 +242,10 @@ server <- function(input, output) {
       summarise(country, year, co2_growth_prct, co2_per_capita, co2_per_gdp)
     
     page4_co2_growth_prct_chart <- ggplot(data = page4_chart_data) +
-      geom_point(mapping = aes(x = year, y = co2_growth_prct)) +
+      geom_smooth(mapping = aes(x = year, y = co2_growth_prct)) +
       labs(
         title = "Percentage change in CO2 emissions",
-        x = "Year", y = "Co2 in tons"
+        x = "Year", y = "Change in %"
       )
     return(page4_co2_growth_prct_chart)
   })
@@ -257,7 +257,7 @@ server <- function(input, output) {
       summarise(country, year, co2_growth_prct, co2_per_capita, co2_per_gdp)
     
     page4_co2_per_capita_chart <- ggplot(data = page4_chart_data) +
-      geom_point(mapping = aes(x = year, y = co2_per_capita)) +
+      geom_smooth(mapping = aes(x = year, y = co2_per_capita)) +
       labs(
         title = "Average per capita CO2 emissions",
         x = "Year", y = "Co2 in tons"
@@ -272,13 +272,13 @@ server <- function(input, output) {
       summarise(country, year, co2_growth_prct, co2_per_capita, co2_per_gdp)
     
     page4_co2_per_gdp_chart <- ggplot(data = page4_chart_data) +
-      geom_point(mapping = aes(x = year, y = co2_per_gdp)) +
+      geom_smooth(mapping = aes(x = year, y = co2_per_gdp)) +
       labs(
         title = "CO2 emissions measured per unit of gross domestic product",
         x = "Year", y = "Co2 in tons"
       )
     return(page4_co2_per_gdp_chart)
+    
   })
-  
   
 }
