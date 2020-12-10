@@ -241,9 +241,15 @@ page_four <- tabPanel(
        community and cultural sensitivity."),
     
     h3("Environmental Responsiveness"),
+<<<<<<< HEAD
     tags$p("There are many aspects to green development, on this page we will only consider the country's carbon emissions."),
     tags$p("Green development is multifaceted, and on this page we will only consider the country's carbon emissions. 
            We will compare the country's Percentage change in CO2 emissions, Average per capita CO2 emissions, 
+=======
+    tags$p("There are many aspects to green development, on this page we will only consider the country’s carbon emissions."),
+    tags$p("Green development is multifaceted, and on this page we will only consider the country’s carbon emissions. 
+           We will compare the country’s Percentage change in CO2 emissions, Average per capita CO2 emissions, 
+>>>>>>> 34bb87cfd2ab0f6ce9e5329238d44bb982ad6278
            and CO2 emissions measured per unit of gross domestic product in recent years to observe whether the country has 
            reduced its carbon emissions."),
     column(4,
