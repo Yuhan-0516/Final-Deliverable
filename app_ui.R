@@ -295,7 +295,7 @@ page_four <- tabPanel(
         plotOutput(outputId = "page4_co2_per_gdp_chart")   
     ),
     
-    tags$p("Beside reducing carbon emissions, Environmental Responsiveness also includes the country's greening."),
+    tags$p("Beside reducing carbon emissions, ", tags$strong("Environmental Responsiveness")," also includes the country's greening."),
     tags$p("For more information, look up ", tags$a(href="https://en.wikipedia.org/wiki/Carbon_neutrality", "Carbon Neutrality.")),
     
 )
